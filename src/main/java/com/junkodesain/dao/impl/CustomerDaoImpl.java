@@ -22,7 +22,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public int save(Customer customer) {
 		
-		String sql = "INSERT INTO multifinance.cust("
+		String sql = "INSERT INTO public.cust("
 				+ "cust_id, salutation, full_name, mother_name, birth_place, birth_date, gender, "
 				+ "religion, martial_status, number_dependent, occupation, sub_occupation, created_at, "
 				+ "created_by, update_at, update_by"
@@ -55,7 +55,7 @@ public class CustomerDaoImpl implements CustomerDao {
 				+ "id, cust_id, salutation, full_name, mother_name, birth_place, birth_date, gender, "
 				+ "religion, martial_status, number_dependent, occupation, sub_occupation, created_at, "
 				+ "created_by, update_at, update_by "
-				+ "FROM multifinance.cust;";
+				+ "FROM public.cust;";
 		
 		List<Customer> customers = jdbcTemplate.query(sql, new CustomerMapper());
 		return customers;
@@ -64,7 +64,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public int update(Customer customer) {
 
-		String sql = "UPDATE multifinance.cust SET "
+		String sql = "UPDATE public.cust SET "
 				+ "salutation=?, full_name=?, mother_name=?, birth_place=?,  birth_date=?, gender=?, "
 				+ "religion=?, martial_status=?, number_dependent=?, occupation=?, sub_occupation=?, "
 				+ "update_at=now(), update_by=? "
@@ -96,7 +96,7 @@ public class CustomerDaoImpl implements CustomerDao {
 				+ "id, cust_id, salutation, full_name, mother_name, birth_place, birth_date, "
 				+ "gender, religion, martial_status, number_dependent, occupation, sub_occupation, "
 				+ "created_at, created_by, update_at, update_by "
-				+ "FROM multifinance.cust "
+				+ "FROM public.cust "
 				+ "WHERE cust_id=?;"; 
 		
 		Customer customer = jdbcTemplate.queryForObject(sql, new Object[] { custId }, new CustomerMapper());
@@ -106,7 +106,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public int delete(String custId) {
 
-		String sql = "DELETE FROM multifinance.cust WHERE cust_id=?;";
+		String sql = "DELETE FROM public.cust WHERE cust_id=?;";
 		int res = jdbcTemplate.update(sql, new Object[] { custId });
 		return res;
 	}
